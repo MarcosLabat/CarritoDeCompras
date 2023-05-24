@@ -13,7 +13,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body class="bg-dark">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -33,26 +33,53 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                <button type="button" class="navbar-toggler " data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" runat="server" href="~/">Nombre de la aplicación</a>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Acerca de</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
+  <nav class="container navbar navbar-dark bg-dark fixed-top mb-5   ">
+      <div class="container-fluid">
+            <a class="navbar-brand" href="#">Carrito de compras</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title text-light" id="offcanvasDarkNavbarLabel">MENU</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                  </li>
+
+                  <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        MARCAS
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                      <li><a class="dropdown-item" href="#">Samsung</a></li>
+                      <li><a class="dropdown-item" href="#">Motorola</a></li>
+                      <li>
                     </ul>
-                </div>
-
-                <asp:LinkButton ID="LinkButton1" class="btn btn-outline-success" runat="server"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #ffffff;"></i></asp:LinkButton>
-
-            </div>
-        </nav>
-        <div class="container body-content">
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      CATEGORIAS
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                      <li><a class="dropdown-item" href="#">Celulares</a></li>
+                      <li><a class="dropdown-item" href="#">PlayStation</a></li>
+                    </ul>
+                  </li>  
+                </ul>
+                  <div class="d-flex mt-3" >
+                      <asp:TextBox placeholder="Ejemplo: Celular" CssClass="form-control me-2" ID="txtbusqueda" runat="server"></asp:TextBox>
+                      <asp:Button ID="btnBusqueda" CssClass="btn btn-outline-success" runat="server" Text="Buscar" />
+                  </div>
+              </div>
+        </div>
+        </div>
+</nav>
+        <div class="container">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
