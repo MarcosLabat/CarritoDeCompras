@@ -11,6 +11,11 @@ namespace Negocio
     {
         private Carrito Carrito;
 
+        public CarritoNegocio()
+        {
+            Carrito = new Carrito();
+        }
+
         public void AgregarArticulo(Articulo articulo)
         {
             Carrito.Articulos.Add(articulo);

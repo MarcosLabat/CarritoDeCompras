@@ -42,7 +42,7 @@
             <asp:Label ID="categoriaArticulo" CssClass="h5" runat="server" Text=""></asp:Label>
             <asp:Label ID="precioArticulo" CssClass="h5 fw-semibold text-success" runat="server" Text=""></asp:Label>
             <asp:Label ID="cuotasArticulo" CssClass="h6 fw-semibold text-primary " runat="server" Text=""></asp:Label>
-            <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" />
+            <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" />
         </div>    
 
 

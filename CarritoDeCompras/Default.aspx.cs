@@ -12,20 +12,37 @@ namespace CarritoDeCompras
     public partial class _Default : Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+        ArticuloNegocio articuloNegocio;
+        CarritoNegocio carrito;
+
+        public _Default()
+        {
+            articuloNegocio = new ArticuloNegocio();
+            carrito = new CarritoNegocio();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            ArticuloNegocio negocio = new ArticuloNegocio();
             if (!IsPostBack)
             {
-                ListaArticulos = negocio.listar();
+                ListaArticulos = articuloNegocio.listar();
                 Session.Add("ListaArticulos", ListaArticulos);
             }
+
+            ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
         }
 
         public void cargarImagen(string url)
         {
             imgArticulo.ImageUrl = url;
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
+            carrito.AgregarArticulo(articulo);
         }
     }
 }

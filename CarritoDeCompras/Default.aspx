@@ -12,7 +12,7 @@
                 <div class="col">
                         <div class="card mw-100">
                             <div class="card-body">
-                                <%if (item.Imagen.Count == 0){
+                                <%if (item.Imagen == null || item.Imagen.Count == 0){
                                         cargarImagen("https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg");
                                   }else{
                                         cargarImagen(item.Imagen.First().ToString());
@@ -22,7 +22,7 @@
                                 <p class="card-text"><%:item.Descripcion %></p>
                                 <p class="card-text fw-semibold text-success"><%: item.Precio + "$"%></p>
                                 <a href="Detalle.aspx?id=<%:item.Id %>" class="btn btn-primary w-100 mb-1">Ver más</a>
-                                <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" />
+                                <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" CommandArgument="1" />
                             </div>
                         </div>
                     </div>
