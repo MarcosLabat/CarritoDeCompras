@@ -13,7 +13,7 @@
                     <div class="col">
                         <div class="card mw-100">
                             <div class="card-body">
-                                <img src="<%#Eval("Imagen[0]") %>" class="card-img-top" alt="<%#Eval("Nombre") %>" />
+                                <%--<img src="<%#Eval("Imagen[0]") %>" class="card-img-top" alt="<%#Eval("Nombre") %>" />--%>
                                 <h4 class="card-title"><%#Eval("Nombre") %></h4>
                                 <p class="card-text"><%#Eval("Descripcion") %></p>
                                 <p class="card-text fw-semibold text-success"><%#Eval("Precio") + "$"%></p>
