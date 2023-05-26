@@ -16,13 +16,16 @@ namespace CarritoDeCompras
         {
 
             ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.listar();
             if (!IsPostBack)
             {
-                repArticulos.DataSource = ListaArticulos;
-                repArticulos.DataBind();
+                ListaArticulos = negocio.listar();
                 Session.Add("ListaArticulos", ListaArticulos);
             }
+        }
+
+        public void cargarImagen(string url)
+        {
+            imgArticulo.ImageUrl = url;
         }
     }
 }
