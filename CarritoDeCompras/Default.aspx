@@ -16,7 +16,7 @@
                                 <img src="<%#Eval("Imagen[0]") %>" class="card-img-top" alt="<%#Eval("Nombre") %>" />
                                 <h4 class="card-title"><%#Eval("Nombre") %></h4>
                                 <p class="card-text"><%#Eval("Descripcion") %></p>
-                                <p class="card-text fw-semibold text-success"><%#Eval("Precio") %></p>
+                                <p class="card-text fw-semibold text-success"><%#Eval("Precio") + "$"%></p>
                                 <a href="Detalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary w-100 mb-1">Ver más</a>
                                 <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" />
                             </div>

@@ -30,6 +30,7 @@ namespace Negocio
                     if (!(datos.Reader["Nombre"] is DBNull)) aux.Nombre = (string)datos.Reader["Nombre"];
                     if (!(datos.Reader["Descripcion"] is DBNull)) aux.Descripcion = (string)datos.Reader["Descripcion"];
                     if (!(datos.Reader["Precio"] is DBNull)) aux.Precio = (decimal)datos.Reader["Precio"];
+                    aux.Precio = Math.Round(aux.Precio);
 
                     ImagenNegocio imagenNegocio = new ImagenNegocio();
                     aux.Imagen = imagenNegocio.imagenesArticulo(idArticulo);

@@ -21,7 +21,7 @@ namespace CarritoDeCompras
             {
                 repArticulos.DataSource = ListaArticulos;
                 repArticulos.DataBind();
-                
+                Session.Add("ListaArticulos", ListaArticulos);
             }
         }
     }
