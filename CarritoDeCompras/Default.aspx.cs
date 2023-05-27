@@ -31,6 +31,7 @@ namespace CarritoDeCompras
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            Session["Carrito"] = carrito.ObtenerArticulos() ;
         }
 
         public void cargarImagen(string url)

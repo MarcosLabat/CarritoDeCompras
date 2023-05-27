@@ -22,7 +22,7 @@
                                 <p class="card-text"><%:item.Descripcion %></p>
                                 <p class="card-text fw-semibold text-success"><%: item.Precio + "$"%></p>
                                 <a href="Detalle.aspx?id=<%:item.Id %>" class="btn btn-primary w-100 mb-1">Ver más</a>
-                                <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" CommandArgument="1" />
+                                <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" CommandArgument="2" />
                             </div>
                         </div>
                     </div>
