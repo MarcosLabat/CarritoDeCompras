@@ -1,13 +1,9 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CarritoDeCompras._Default" %>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <main class="mt-5 text-light text-center">
-        <div class="mt-5"></div>
-
-        <asp:Label ID="llbTitulo" CssClass="h3 d-flex justify-content-center text-white" runat="server" Text="PRODUCTOS"></asp:Label>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <% foreach (var item in ListaArticulos){
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Filtro.aspx.cs" Inherits="CarritoDeCompras.Filtro" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Label ID="lblTitulo" CssClass="h3 d-flex justify-content-center text-white mb-3 text-center" runat="server" Text=""></asp:Label>
+    <%if(listaArticulo != null && listaArticulo.Count > 0){%>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <% foreach (var item in listaArticulo){
 %>
                 <div class="col">
                         <div class="card mw-100">
@@ -28,6 +24,5 @@
                     </div>
                <% } %>
         </div>
-    </main>
-
+    <%}%>
 </asp:Content>
