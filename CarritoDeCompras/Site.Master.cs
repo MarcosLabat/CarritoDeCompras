@@ -13,11 +13,13 @@ namespace CarritoDeCompras
     {
         public List<Marca> listaMarca { get; set; }
         public List<Categoria> listaCategoria { get; set; }
+        public Carrito Carrito { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack){
                 MarcaNegocio marca = new MarcaNegocio();
                 CategoriaNegocio categoria = new CategoriaNegocio();
+                Carrito = new Carrito();
                 listaMarca = marca.listar();
                 listaCategoria = categoria.listar();
                 repMarcas.DataSource = listaMarca;

@@ -105,6 +105,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Detalle.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Filtro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -149,6 +150,13 @@
     </Compile>
     <Compile Include="Detalle.aspx.designer.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Filtro.aspx.cs">
+      <DependentUpon>Filtro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Filtro.aspx.designer.cs">
+      <DependentUpon>Filtro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
