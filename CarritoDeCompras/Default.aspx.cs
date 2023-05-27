@@ -28,7 +28,6 @@ namespace CarritoDeCompras
             {
                 ListaArticulos = articuloNegocio.listar();
                 Session.Add("ListaArticulos", ListaArticulos);
-
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
@@ -49,7 +48,7 @@ namespace CarritoDeCompras
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
-            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            int idArticulo = int.Parse((sender as Button).CommandArgument);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
             Session["Carrito"] = carrito;

@@ -43,15 +43,14 @@ namespace CarritoDeCompras
             StringBuilder sb = new StringBuilder();
             foreach (var item in carrito.ObtenerArticulos())
             {
-                // Construir el HTML para mostrar cada elemento del carrito
                 sb.Append("<div>");
-                sb.Append(item);
+                sb.Append("<span>" + item.Nombre + "</span>");
+                sb.Append("<span>" + item.Precio.ToString("C") + "</span>");
+                sb.Append("<button onclick=\"EliminarArticulo('" + item.Id + "')\">Eliminar</button>");
                 sb.Append("</div>");
             }
 
-            // Asignar el HTML construido al cuerpo del modal
             pnlCarrito.Controls.Add(new LiteralControl(sb.ToString()));
-
         }
     }
 }
