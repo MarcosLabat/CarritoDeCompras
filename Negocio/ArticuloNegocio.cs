@@ -30,6 +30,7 @@ namespace Negocio
                     if (!(datos.Reader["Nombre"] is DBNull)) aux.Nombre = (string)datos.Reader["Nombre"];
                     if (!(datos.Reader["Descripcion"] is DBNull)) aux.Descripcion = (string)datos.Reader["Descripcion"];
                     if (!(datos.Reader["Precio"] is DBNull)) aux.Precio = (decimal)datos.Reader["Precio"];
+                    aux.Precio = Math.Round(aux.Precio);
 
                     ImagenNegocio imagenNegocio = new ImagenNegocio();
                     aux.Imagen = imagenNegocio.imagenesArticulo(idArticulo);
@@ -268,6 +269,57 @@ namespace Negocio
 
                 return lista;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.cerrar();
+            }
+        }
+
+        public Articulo buscarPorId(int id)
+        {
+            Articulo articulo = new Articulo();
+            ConexionDB db = new ConexionDB();
+            string query = "SELECT A.Id as Id, A.Codigo as Codigo, A.Precio as Precio, A.Nombre as Nombre, A.Descripcion as Descripcion, A.IdMarca as IdMarca, M.Descripcion as Marca, A.IdCategoria as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id WHERE A.Id = @Id";
+            try
+            {
+                db.SetearQuery(query);
+                db.setearParametro("@Id", id);
+                db.leer();
+                if (db.Reader.Read())
+                {
+                    int idArticulo = (int)db.Reader["Id"];
+                    articulo.Id = idArticulo;
+                    if (!(db.Reader["Codigo"] is DBNull)) articulo.Codigo = (string)db.Reader["Codigo"];
+                    if (!(db.Reader["Nombre"] is DBNull)) articulo.Nombre = (string)db.Reader["Nombre"];
+                    if (!(db.Reader["Descripcion"] is DBNull)) articulo.Descripcion = (string)db.Reader["Descripcion"];
+                    if (!(db.Reader["Precio"] is DBNull)) articulo.Precio = (decimal)db.Reader["Precio"];
+
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    articulo.Imagen = imagenNegocio.imagenesArticulo(idArticulo);
+
+
+                    if (!(db.Reader["IdMarca"] is DBNull))
+                    {
+                        articulo.Marca = new Marca();
+                        articulo.Marca.Descripcion = (string)db.Reader["Marca"];
+                        articulo.Marca.Id = (int)db.Reader["IdMarca"];
+
+                    }
+
+                    if (!(db.Reader["IdCategoria"] is DBNull))
+                    {
+                        articulo.Categoria = new Categoria();
+                        articulo.Categoria.Descripcion = (string)db.Reader["Categoria"];
+                        articulo.Categoria.Id = (int)db.Reader["IdCategoria"];
+                    }
+                }
+
+                return articulo;
+            } 
             catch (Exception ex)
             {
                 throw ex;
