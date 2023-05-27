@@ -15,12 +15,10 @@ namespace CarritoDeCompras
     {
         public List<Articulo> ListaArticulos { get; set; }
         ArticuloNegocio articuloNegocio;
-        CarritoNegocio carrito;
 
         public _Default()
         {
             articuloNegocio = new ArticuloNegocio();
-            carrito = new CarritoNegocio();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,10 +28,10 @@ namespace CarritoDeCompras
             {
                 ListaArticulos = articuloNegocio.listar();
                 Session.Add("ListaArticulos", ListaArticulos);
+
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
-            Session["Carrito"] = carrito.ObtenerArticulos() ;
         }
 
         public void cargarImagen(string url)
@@ -50,9 +48,12 @@ namespace CarritoDeCompras
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
             int idArticulo = int.Parse(btnAgregar.CommandArgument);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
+            Session["Carrito"] = carrito;
+
         }
 
         private bool VerificarUrlImagen(string url)

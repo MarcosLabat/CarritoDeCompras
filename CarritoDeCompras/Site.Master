@@ -54,6 +54,10 @@
                             </div>
                             <div class="modal-body">
 
+                                <asp:Panel ID="pnlCarrito" runat="server">
+                                    <!-- Aquí se mostrarán los elementos del carrito -->
+                                </asp:Panel>
+
 <%--                                <% foreach (var item in Carrito.Articulos)
                                     { %>
                                 <p><%: item.Nombre %></p>
