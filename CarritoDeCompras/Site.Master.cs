@@ -27,8 +27,6 @@ namespace CarritoDeCompras
                 repMarcas.DataBind();
                 repCategorias.DataBind();
             }
-
-
         }
     }
 }
