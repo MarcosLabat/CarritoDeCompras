@@ -41,13 +41,34 @@ namespace CarritoDeCompras
         private void MostrarCarritoEnModal(CarritoNegocio carrito)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var item in carrito.ObtenerArticulos())
+
+            if (carrito.ObtenerArticulos().Count() > 0)
             {
-                sb.Append("<div>");
-                sb.Append("<span>" + item.Nombre + "</span>");
-                sb.Append("<span>" + item.Precio.ToString("C") + "</span>");
-                sb.Append("<button onclick=\"EliminarArticulo('" + item.Id + "')\">Eliminar</button>");
-                sb.Append("</div>");
+                sb.Append("<table class=\"table\">");
+                sb.Append("<thead class=\"thead-dark\">");
+                sb.Append("<tr>");
+                sb.Append("<th>Nombre</th>");
+                sb.Append("<th>Precio</th>");
+                sb.Append("<th></th>");
+                sb.Append("</tr>");
+                sb.Append("</thead>");
+                sb.Append("<tbody>");
+
+                foreach (var item in carrito.ObtenerArticulos())
+                {
+                    sb.Append("<tr>");
+                    sb.Append("<td class=\"align-middle\">" + item.Nombre + "</td>");
+                    sb.Append("<td class=\"align-middle\">" + item.Precio.ToString("C") + "</td>");
+                    sb.Append("<td><button class=\"btn btn-danger\">Eliminar</button></td>");
+                    sb.Append("</tr>");
+                }
+
+                sb.Append("</tbody>");
+                sb.Append("</table>");
+            }
+            else
+            {
+                sb.Append("<p>No hay items en el carrito.</p>");
             }
 
             pnlCarrito.Controls.Add(new LiteralControl(sb.ToString()));

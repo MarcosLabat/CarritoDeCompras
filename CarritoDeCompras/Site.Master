@@ -53,17 +53,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-
                                 <asp:Panel ID="pnlCarrito" runat="server">
-                                    <!-- Aquí se mostrarán los elementos del carrito -->
+                                    <!-- Items del carrito -->
                                 </asp:Panel>
-
-<%--                                <% foreach (var item in Carrito.Articulos)
-                                    { %>
-                                <p><%: item.Nombre %></p>
-                                <p><%: item.Precio %></p>
-
-                                <% } %>--%>
+                                <% if (Carrito.ObtenerArticulos().Count > 0) { %>
+                                <a href="Detalle.aspx?id=<%: 1 %>" class="btn btn-primary w-100 mb-1">Ir a pagar</a>
+                                <%} %>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
