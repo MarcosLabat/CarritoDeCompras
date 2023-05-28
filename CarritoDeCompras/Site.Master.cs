@@ -17,6 +17,13 @@ namespace CarritoDeCompras
         public CarritoNegocio Carrito { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Carrito = Session["Carrito"] as CarritoNegocio;
+            if (Carrito == null)
+            {
+                Carrito = new CarritoNegocio();
+                Session["Carrito"] = Carrito;
+            }
+
             if (!IsPostBack){
                 MarcaNegocio marca = new MarcaNegocio();
                 CategoriaNegocio categoria = new CategoriaNegocio();
@@ -26,19 +33,11 @@ namespace CarritoDeCompras
                 repCategorias.DataSource = listaCategoria;
                 repMarcas.DataBind();
                 repCategorias.DataBind();
-
-
+                MostrarCarritoEnModal(Carrito);
             }
-            Carrito = Session["Carrito"] as CarritoNegocio;
-            if (Carrito == null)
-            {
-                Carrito = new CarritoNegocio();
-                Session["Carrito"] = Carrito;
-            }
-            MostrarCarritoEnModal(Carrito);
         }
 
-        private void MostrarCarritoEnModal(CarritoNegocio carrito)
+        protected void MostrarCarritoEnModal(CarritoNegocio carrito)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -72,6 +71,12 @@ namespace CarritoDeCompras
             }
 
             pnlCarrito.Controls.Add(new LiteralControl(sb.ToString()));
+        }
+
+        public void ActualizarContenidoCarrito()
+        {
+            CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
+            MostrarCarritoEnModal(carrito);
         }
     }
 }

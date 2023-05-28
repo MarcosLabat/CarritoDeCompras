@@ -53,6 +53,8 @@ namespace CarritoDeCompras
             carrito.AgregarArticulo(articulo);
             Session["Carrito"] = carrito;
 
+            var masterPage = this.Master as SiteMaster;
+            masterPage.ActualizarContenidoCarrito();
         }
 
         private bool VerificarUrlImagen(string url)
