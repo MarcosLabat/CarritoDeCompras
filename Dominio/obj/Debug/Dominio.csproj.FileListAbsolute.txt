@@ -10,3 +10,9 @@ D:\Proyectos\C#\TP4PROGRAMACION\CarritoDeCompras\Dominio\obj\Debug\Dominio.cspro
 D:\Proyectos\C#\TP4PROGRAMACION\CarritoDeCompras\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 D:\Proyectos\C#\TP4PROGRAMACION\CarritoDeCompras\Dominio\obj\Debug\Dominio.dll
 D:\Proyectos\C#\TP4PROGRAMACION\CarritoDeCompras\Dominio\obj\Debug\Dominio.pdb
+D:\Proyectos\C#\CarritoDeCompras\Dominio\bin\Debug\Dominio.dll
+D:\Proyectos\C#\CarritoDeCompras\Dominio\bin\Debug\Dominio.pdb
+D:\Proyectos\C#\CarritoDeCompras\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+D:\Proyectos\C#\CarritoDeCompras\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+D:\Proyectos\C#\CarritoDeCompras\Dominio\obj\Debug\Dominio.dll
+D:\Proyectos\C#\CarritoDeCompras\Dominio\obj\Debug\Dominio.pdb

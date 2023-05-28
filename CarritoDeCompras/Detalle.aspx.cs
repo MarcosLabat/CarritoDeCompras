@@ -59,5 +59,19 @@ namespace CarritoDeCompras
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
         }
+
+        protected string cargarImagen(string url)
+        {
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            if (imagenNegocio.VerificarUrlImagen(url))
+            {
+                if(imagenNegocio.VerificarCargaImagen(url))
+                {
+                    return url;
+                }
+            }
+            
+            return "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg";
+        }
     }
 }

@@ -1,9 +1,14 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Negocio
 {
@@ -101,6 +106,49 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool VerificarUrlImagen(string url)
+        {
+            if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                try
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Method = "HEAD";
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    {
+                        return response.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch (WebException)
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public bool VerificarCargaImagen(string url)
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    using (Stream stream = client.OpenRead(url))
+                    {
+                        using (var image = System.Drawing.Image.FromStream(stream))
+                        {
+                            return true; // Cargo la img
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false; // No cargo la img
             }
         }
     }
