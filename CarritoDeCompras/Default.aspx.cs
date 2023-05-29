@@ -31,6 +31,7 @@ namespace CarritoDeCompras
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            
         }
 
         public void cargarImagen(string url)
@@ -49,16 +50,19 @@ namespace CarritoDeCompras
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
-            int idArticulo = int.Parse((sender as Button).CommandArgument.ToString());
+
+
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
             Session["Carrito"] = carrito;
 
-            
+
 
             var masterPage = this.Master as SiteMaster;
             masterPage.ActualizarContenidoCarrito();
         }
+
 
     }
 }

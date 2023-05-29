@@ -15,10 +15,8 @@ namespace CarritoDeCompras
         {
             if (!IsPostBack)
             {
-                // Obtener el carrito de la sesión
                 CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
 
-                // Verificar si el carrito existe y contiene artículos
                 if (carrito != null && carrito.ObtenerArticulos().Count > 0)
                 {
                     // Enlazar el carrito al control Repeater
@@ -27,7 +25,6 @@ namespace CarritoDeCompras
                 }
                 else
                 {
-                    // No hay artículos en el carrito, redirigir a la página principal
                     Response.Redirect("~/Default.aspx");
                 }
             }
@@ -43,8 +40,7 @@ namespace CarritoDeCompras
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
-            // Lógica para procesar el pago y redirigir a la página de confirmación
-            // ...
+
         }
 
         private void MostrarCarrito()
@@ -74,7 +70,6 @@ namespace CarritoDeCompras
 
         protected string ObtenerTotalCarrito()
         {
-            // Obtener el carrito de la sesión
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
 
             if (carrito != null)
