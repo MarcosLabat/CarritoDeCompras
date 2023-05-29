@@ -21,14 +21,30 @@ namespace Negocio
             Carrito.Articulos.Add(articulo);
         }
 
-        public void QuitarArticulo(Articulo articulo)
+        public void QuitarArticulo(int idArticulo)
         {
-            Carrito.Articulos.Remove(articulo);
+            Articulo articulo = Carrito.Articulos.FirstOrDefault(a => a.Id == idArticulo);
+            if (articulo != null)
+            {
+                Carrito.Articulos.Remove(articulo);
+            }
         }
 
         public List<Articulo> ObtenerArticulos()
         {
             return Carrito.Articulos;
+        }
+
+        public decimal ObtenerTotal()
+        {
+            decimal total = 0;
+
+            foreach (var item in ObtenerArticulos())
+            {
+                total += item.Precio;
+            }
+
+            return total;
         }
     }
 }

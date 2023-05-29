@@ -31,11 +31,13 @@ namespace CarritoDeCompras
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            
         }
 
         public void cargarImagen(string url)
         {
-            if (VerificarUrlImagen(url))
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            if (imagenNegocio.VerificarUrlImagen(url))
             {
                 imgArticulo.ImageUrl = url;
             }
@@ -48,35 +50,19 @@ namespace CarritoDeCompras
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
-            int idArticulo = int.Parse((sender as Button).CommandArgument);
+
+
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
             Session["Carrito"] = carrito;
+
+
 
             var masterPage = this.Master as SiteMaster;
             masterPage.ActualizarContenidoCarrito();
         }
 
-        private bool VerificarUrlImagen(string url)
-        {
-            if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
-            {
-                try
-                {
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                    request.Method = "HEAD";
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                        return response.StatusCode == HttpStatusCode.OK;
-                    }
-                }
-                catch (WebException)
-                {
-                    return false;
-                }
-            }
 
-            return false;
-        }
     }
 }
