@@ -23,27 +23,29 @@ namespace CarritoDeCompras
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 ListaArticulos = articuloNegocio.listar();
                 Session.Add("ListaArticulos", ListaArticulos);
+
+                rptArticulos.DataSource = ListaArticulos;
+                rptArticulos.DataBind();
             }
 
             ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
-            
+
         }
 
-        public void cargarImagen(string url)
+        public string cargarImagen(string url)
         {
             ImagenNegocio imagenNegocio = new ImagenNegocio();
             if (imagenNegocio.VerificarUrlImagen(url))
             {
-                imgArticulo.ImageUrl = url;
+                return string.Format("<img src='{0}' class='card-img-top' />", url);
             }
             else
             {
-                imgArticulo.ImageUrl = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg";
+                return "<img src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg' class='card-img-top' />";
             }
         }
 
@@ -51,7 +53,7 @@ namespace CarritoDeCompras
         {
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
 
-
+            Button btnAgregar = (Button)sender;
             int idArticulo = int.Parse(btnAgregar.CommandArgument);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
@@ -63,6 +65,11 @@ namespace CarritoDeCompras
             masterPage.ActualizarContenidoCarrito();
         }
 
+        protected string GetButtonCommandArgument(object dataItem)
+        {
+            var item = (Articulo)dataItem;
+            return item.Id.ToString();
+        }
 
     }
 }
