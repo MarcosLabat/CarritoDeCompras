@@ -19,7 +19,6 @@ namespace CarritoDeCompras
 
                 if (carrito != null && carrito.ObtenerArticulos().Count > 0)
                 {
-                    // Enlazar el carrito al control Repeater
                     rptCarrito.DataSource = carrito.ObtenerArticulos();
                     rptCarrito.DataBind();
                 }
@@ -27,6 +26,8 @@ namespace CarritoDeCompras
                 {
                     Response.Redirect("~/Default.aspx");
                 }
+
+                
             }
         }
 
