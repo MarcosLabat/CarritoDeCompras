@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Detalle.aspx.cs" Inherits="CarritoDeCompras.Detalle" %>
+<%@ Import Namespace="Dominio" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblError" CssClass="h1 d-flex justify-content-center text-white" runat="server" Text=""></asp:Label>
@@ -10,11 +11,11 @@
                     <% for (int i = 0; i < articulos[indice].Imagen.Count; i++){
                             if(i == 0){%>
                                 <div class="carousel-item active">
-                                   <img src="<%:cargarImagen(articulos[indice].Imagen[i].ToString())%>" class="img-thumbnail mx-auto d-block w-75 mb-3" alt="prueba" />
+                                   <img src="<%:cargarImagen(articulos[indice].Imagen[i].ToString())%>" class="img-thumbnail mx-auto d-block w-75 mb-3" alt="prueba" onerror="this.src'https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'"/>
                                  </div>
                             <%}else{%>
                                 <div class="carousel-item">
-                                   <img src="<%:cargarImagen(articulos[indice].Imagen[i].ToString())%>" class="img-thumbnail mx-auto d-block w-75 mb-3" alt="prueba" />
+                                   <img src="<%:cargarImagen(articulos[indice].Imagen[i].ToString())%>" class="img-thumbnail mx-auto d-block w-75 mb-3" alt="prueba" onerror="this.src'https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'"/>
                                  </div>
                               <%}%>
                     <% }%>
@@ -38,7 +39,7 @@
             <asp:Label ID="categoriaArticulo" CssClass="h5" runat="server" Text=""></asp:Label>
             <asp:Label ID="precioArticulo" CssClass="h5 fw-semibold text-success" runat="server" Text=""></asp:Label>
             <asp:Label ID="cuotasArticulo" CssClass="h6 fw-semibold text-primary " runat="server" Text=""></asp:Label>
-            <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" />
+            <asp:Button ID="btnAgregar" CssClass="btn btn-success w-100 mt-1" runat="server" Text="Agregar Carrito" OnClick="btnAgregar_Click" CommandArgument="<%: id %>" />
         </div>    
 
 

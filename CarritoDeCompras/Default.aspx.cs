@@ -43,10 +43,8 @@ namespace CarritoDeCompras
             {
                 return string.Format("<img src='{0}' class='card-img-top' />", url);
             }
-            else
-            {
-                return "<img src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg' class='card-img-top' />";
-            }
+            
+            return "<img src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg' class='card-img-top' />";
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -70,6 +68,5 @@ namespace CarritoDeCompras
             var item = (Articulo)dataItem;
             return item.Id.ToString();
         }
-
     }
 }
