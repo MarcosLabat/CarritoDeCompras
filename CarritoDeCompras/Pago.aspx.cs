@@ -41,7 +41,7 @@ namespace CarritoDeCompras
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
-
+            // TODO: Llevar a pagar articulos del carrito
         }
 
         private void MostrarCarrito()

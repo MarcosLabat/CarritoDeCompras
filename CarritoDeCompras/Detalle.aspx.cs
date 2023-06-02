@@ -14,6 +14,8 @@ namespace CarritoDeCompras
         public List<Articulo> articulos { get; set; }
         public int indice { get; set; }
         public bool hayArt { get; set; }
+        private Articulo articulo { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hayArt = false;
@@ -40,8 +42,8 @@ namespace CarritoDeCompras
                         descArticulo.Text = "Descpricion: " + articulos[indice].Descripcion;
                         marcaArticulo.Text = "Marca: "+ articulos[indice].Marca.ToString();
                         categoriaArticulo.Text = "Categoria: " +  articulos[indice].Categoria.ToString(); ;
-                        precioArticulo.Text = "Precio: " + articulos[indice].Precio.ToString() + "$";
-                        cuotasArticulo.Text = "3 CUOTAS SIN INTERES DE " + (articulos[indice].Precio / 3).ToString("0.##") + "$ CADA UNA";
+                        precioArticulo.Text = "Precio: $" + articulos[indice].Precio.ToString();
+                        cuotasArticulo.Text = "3 CUOTAS SIN INTERES DE $" + (articulos[indice].Precio / 3).ToString("0.##") + " CADA UNA";
                     }
                     else
                     {
@@ -58,6 +60,19 @@ namespace CarritoDeCompras
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+            Button btnAgregar = (Button)sender;
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
+            carrito.AgregarArticulo(articulo);
+            Session["Carrito"] = carrito;
+
+
+
+            var masterPage = this.Master as SiteMaster;
+            masterPage.ActualizarContenidoCarrito();
         }
 
         protected string cargarImagen(string url)
@@ -65,10 +80,7 @@ namespace CarritoDeCompras
             ImagenNegocio imagenNegocio = new ImagenNegocio();
             if (imagenNegocio.VerificarUrlImagen(url))
             {
-                if(imagenNegocio.VerificarCargaImagen(url))
-                {
-                    return url;
-                }
+                return url;
             }
             
             return "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg";

@@ -130,26 +130,5 @@ namespace Negocio
 
             return false;
         }
-
-        public bool VerificarCargaImagen(string url)
-        {
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    using (Stream stream = client.OpenRead(url))
-                    {
-                        using (var image = System.Drawing.Image.FromStream(stream))
-                        {
-                            return true; // Cargo la img
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return false; // No cargo la img
-            }
-        }
     }
 }
