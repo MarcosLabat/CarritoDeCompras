@@ -39,6 +39,7 @@ namespace CarritoDeCompras
 
         protected void MostrarCarritoEnModal(CarritoNegocio carrito)
         {
+            lblCantidad.Text = carrito.ObtenerArticulos().Count().ToString();
             if (carrito.ObtenerArticulos().Count() > 0)
             {
                 rptModal.DataSource = carrito.ObtenerArticulos();

@@ -39,8 +39,9 @@
                 </button>
 
                 <a class="navbar-brand" href="#">CARRITO DE COMPRAS</a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#carritoModal">
                     <i class="fa-solid fa-cart-shopping fa-xl" style="color: #ffffff;"></i>
+                    <asp:Label ID="lblCantidad" CssClass="mb-0 ms-1" runat="server"></asp:Label>
                 </button>
                 <div class="modal fade" id="carritoModal" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel">
                     <div class="modal-dialog" role="document">
