@@ -70,8 +70,8 @@
                                             <p><%# ((Dominio.Articulo)Container.DataItem).Nombre %></p>
                                             <p><%# ((Dominio.Articulo)Container.DataItem).Precio %></p>
                                             <asp:Button ID="btnEliminar" CssClass="btn btn-danger" runat="server" Text="Eliminar" OnClick="btnEliminar_Click"  CommandArgument='<%# ((Dominio.Articulo)Container.DataItem).Id.ToString() %>'/>
-                                            <hr />
                                         </div>
+                                    <hr />
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <a href="Pago.aspx" class="btn btn-primary w-100 mb-1">Ir a pagar</a>

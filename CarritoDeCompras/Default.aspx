@@ -13,7 +13,7 @@
                     <div class="col">
                         <div class="card mw-100">
                             <div class="card-body">
-                                <%# cargarImagen(((Articulo)Container.DataItem)?.Imagen?.LastOrDefault()?.ToString()) %>
+                                <%# cargarImagen(((Dominio.Articulo)Container.DataItem)?.Imagen?.LastOrDefault()?.ToString()) %>
                                 <asp:Image CssClass="card-img-top" ID="imgArticulo" runat="server" onerror="this.src'https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'"/>
                                 <h4 class="card-title"><%# ((Articulo)Container.DataItem).Nombre %></h4>
                                 <p class="card-text"><%# ((Articulo)Container.DataItem).Descripcion %></p>

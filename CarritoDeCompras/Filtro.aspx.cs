@@ -12,6 +12,7 @@ namespace CarritoDeCompras
     public partial class Filtro : System.Web.UI.Page
     {
         public List<Articulo> listaArticulo { get; set; }
+        ArticuloNegocio articuloNegocio = new ArticuloNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,8 +31,11 @@ namespace CarritoDeCompras
                     else
                     {
                         lblTitulo.Text = "ARTICULOS PARA LA MARCA " + "'" + listaArticulo[0].Marca.ToString() + "'";
+                        rptArticulos.DataSource = listaArticulo;
+                        rptArticulos.DataBind();
                     }
-                }else if(Request.QueryString["Tipo"] == "Categoria"){
+                }
+                else if(Request.QueryString["Tipo"] == "Categoria"){
                     listaArticulo = articulo.listarPorCategoria(int.Parse(Request.QueryString["id"]));
                     if (listaArticulo.Count == 0)
                     {
@@ -40,6 +44,8 @@ namespace CarritoDeCompras
                     else
                     {
                         lblTitulo.Text = "ARTICULOS PARA LA CATEGORIA " + "'" + listaArticulo[0].Categoria.ToString() + "'";
+                        rptArticulos.DataSource = listaArticulo;
+                        rptArticulos.DataBind();
                     }
                 }
                 else{
@@ -49,13 +55,31 @@ namespace CarritoDeCompras
             }
         }
 
-        public void cargarImagen(string url)
+        public string cargarImagen(string url)
         {
-            imgArticulo.ImageUrl = url;
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            if (imagenNegocio.VerificarUrlImagen(url))
+            {
+                return string.Format("<img src='{0}' class='card-img-top' />", url);
+            }
+
+            return "<img src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg' class='card-img-top' />";
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
+
+            Button btnAgregar = (Button)sender;
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
+            carrito.AgregarArticulo(articulo);
+            Session["Carrito"] = carrito;
+
+
+
+            var masterPage = this.Master as SiteMaster;
+            masterPage.ActualizarContenidoCarrito();
         }
     }
 }
