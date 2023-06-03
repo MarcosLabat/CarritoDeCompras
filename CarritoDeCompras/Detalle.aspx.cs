@@ -14,7 +14,7 @@ namespace CarritoDeCompras
         public List<Articulo> articulos { get; set; }
         public int indice { get; set; }
         public bool hayArt { get; set; }
-        private Articulo articulo { get; set; }
+        public Articulo articulo { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,22 +32,10 @@ namespace CarritoDeCompras
                         if (articulo.Id == parametro)
                         {
                             hayArt = true;
+                            Session.Add("Articulo", articulo);
                             break;
                         }
                         indice++;
-                    }
-                    if (hayArt)
-                    {
-                        tituloArticulo.Text = articulos[indice].Nombre;
-                        descArticulo.Text = "Descpricion: " + articulos[indice].Descripcion;
-                        marcaArticulo.Text = "Marca: "+ articulos[indice].Marca.ToString();
-                        categoriaArticulo.Text = "Categoria: " +  articulos[indice].Categoria.ToString(); ;
-                        precioArticulo.Text = "Precio: $" + articulos[indice].Precio.ToString();
-                        cuotasArticulo.Text = "3 CUOTAS SIN INTERES DE $" + (articulos[indice].Precio / 3).ToString("0.##") + " CADA UNA";
-                    }
-                    else
-                    {
-                        lblError.Text = "NO EXISTE PRODUCTO CON ESE ID";
                     }
 
                 }
@@ -55,6 +43,14 @@ namespace CarritoDeCompras
                 {
                     lblError.Text = "NO SE RECIBIO NINGUN ARTICULO";
                 }
+            }else{
+                hayArt = true;
+            }
+
+            if (hayArt){
+                cargarArticulo();
+            }else {
+                lblError.Text = "NO EXISTE PRODUCTO CON ESE ID";
             }
         }
 
@@ -63,8 +59,7 @@ namespace CarritoDeCompras
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
 
-            Button btnAgregar = (Button)sender;
-            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            int idArticulo = int.Parse(Request.QueryString["id"]);
             Articulo articulo = articuloNegocio.buscarPorId(idArticulo);
             carrito.AgregarArticulo(articulo);
             Session["Carrito"] = carrito;
@@ -82,8 +77,19 @@ namespace CarritoDeCompras
             {
                 return url;
             }
-            
+
             return "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg";
+        }
+
+        protected void cargarArticulo()
+        {
+            articulo = Session["Articulo"] as Articulo;
+            tituloArticulo.Text = articulo.Nombre;
+            descArticulo.Text = "Descpricion: " + articulo.Descripcion;
+            marcaArticulo.Text = "Marca: " + articulo.Marca.ToString();
+            categoriaArticulo.Text = "Categoria: " + articulo.Categoria.ToString(); ;
+            precioArticulo.Text = "Precio: $" + articulo.Precio.ToString();
+            cuotasArticulo.Text = "3 CUOTAS SIN INTERES DE $" + (articulo.Precio / 3).ToString("0.##") + " CADA UNA";
         }
     }
 }

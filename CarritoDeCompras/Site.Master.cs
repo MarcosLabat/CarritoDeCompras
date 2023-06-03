@@ -58,7 +58,7 @@ namespace CarritoDeCompras
                     sb.Append("<tr id=\"filaArticulo_" + item.Id + "\">");
                     sb.Append("<td class=\"align-middle\">" + item.Nombre + "</td>");
                     sb.Append("<td class=\"align-middle\">" + item.Precio.ToString("C") + "</td>");
-                    //sb.Append("<td><button class=\"btn btn-danger\" onclick=\"EliminarArticulo(" + item.Id + ")\">Eliminar</button></td>");
+                    sb.Append("<td><button class=\"btn btn-danger\" onclick=\"EliminarArticulo(" + item.Id + ")\">Eliminar</button></td>");
                     sb.Append("</tr>");
                 }
 
