@@ -39,7 +39,12 @@ namespace CarritoDeCompras
 
         protected void MostrarCarritoEnModal(CarritoNegocio carrito)
         {
-            StringBuilder sb = new StringBuilder();
+            if (carrito.ObtenerArticulos().Count() > 0)
+            {
+                rptModal.DataSource = carrito.ObtenerArticulos();
+                rptModal.DataBind();
+            }
+            /*StringBuilder sb = new StringBuilder();
 
             if (carrito.ObtenerArticulos().Count() > 0)
             {
@@ -70,13 +75,22 @@ namespace CarritoDeCompras
                 sb.Append("<p>No hay items en el carrito.</p>");
             }
 
-            pnlCarrito.Controls.Add(new LiteralControl(sb.ToString()));
+            pnlCarrito.Controls.Add(new LiteralControl(sb.ToString()));*/
         }
 
         public void ActualizarContenidoCarrito()
         {
             CarritoNegocio carrito = Session["Carrito"] as CarritoNegocio;
             MostrarCarritoEnModal(carrito);
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Button btnAgregar = (Button)sender;
+            int idArticulo = int.Parse(btnAgregar.CommandArgument);
+            Carrito.QuitarArticulo(idArticulo);
+            Session["Carrito"] = Carrito;
+            ActualizarContenidoCarrito();
         }
     }
 }

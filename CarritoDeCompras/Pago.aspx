@@ -4,7 +4,6 @@
     .pago table, .pago h1 {
         color: white;
     }
-
 </style>
     <div class="pago">
         <h1>Página de Pago</h1>
@@ -12,6 +11,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Descripcion</th>
                     <th>Precio</th>
                     <th></th>
                 </tr>
@@ -21,6 +21,7 @@
                     <ItemTemplate>
                         <tr>
                             <td><%# Eval("Nombre") %></td>
+                            <td><%# Eval("Descripcion") %></td>
                             <td><%# Eval("Precio", "{0:C}") %></td>
                             <td>
                                 <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" CommandName="Eliminar" CommandArgument='<%# Container.ItemIndex %>' OnClick="btnEliminar_Click" /></td>
@@ -28,8 +29,9 @@
                     </ItemTemplate>
                 </asp:Repeater>
                 <tr>
-                    <td>Total:</td>
-                    <td colspan="2"><%: ObtenerTotalCarrito().ToString() %></td>
+                    <td class="display-6">Total</td>
+                    <td></td>
+                    <td colspan="2" class="display-6"><%: ObtenerTotalCarrito().ToString() %></td>
                 </tr>
             </tbody>
         </table>
